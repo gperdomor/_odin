@@ -18,7 +18,7 @@ comment:
   require_changes: false
   require_base: yes
   require_head: yes
-  # branches: null
+  branches: null
 
 flags:
   api:
