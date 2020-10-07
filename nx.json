@@ -4,7 +4,7 @@
     "defaultBase": "master"
   },
   "implicitDependencies": {
-    "workspace.json": "*",
+    "angular.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
@@ -19,14 +19,10 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "YTA1YmViY2UtZDk1YS00NTAzLWJiODItZWQxYmY5ODI3YmUwfHJlYWQtd3JpdGU=",
-        "cacheableOperations": [
-          "build",
-          "test",
-          "lint",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
         "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        "showUsageWarnings": true,
+        "scan": true
       }
     }
   },

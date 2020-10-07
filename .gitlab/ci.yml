@@ -13,7 +13,7 @@ api:test:
     - npx nx run api:test --skip-nx-cache --code-coverage
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   after_script:
-    - bash <(curl -s https://codecov.io/bash)
+    - bash <(curl https://codecov.io/bash) -f coverage/apps/api/coverage-final.json -F api
   artifacts:
     reports:
-      cobertura: coverage/cobertura-coverage.xml
+      cobertura: coverage/apps/api/cobertura-coverage.xml

@@ -1,6 +1,8 @@
 coverage:
   status:
     project:
+      default:
+        target: auto
       api:
         target: auto
         flags:
@@ -10,12 +12,21 @@ coverage:
       #   flags:
       #     - app2
 
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+  require_base: yes
+  require_head: yes
+  # branches: null
+
 flags:
   api:
     paths:
-      - coverage/apps/api/coverage-final.json
+      - apps/api/
     carryforward: true
   # app2:
   #   paths:
-  #     - coverage/apps/app2/coverage-final.json
+  #     - apps/app2/
   #   carryforward: true
+
