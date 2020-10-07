@@ -1,0 +1,19 @@
+api:test:
+  image: node:14.13
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+    policy: pull
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npx nx run api:test --skip-nx-cache --code-coverage
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  after_script:
+    - bash <(curl -s https://codecov.io/bash)
+  artifacts:
+    reports:
+      cobertura: coverage/cobertura-coverage.xml
