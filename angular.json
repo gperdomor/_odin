@@ -53,7 +53,8 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/nest"
+    "defaultCollection": "@nrwl/nest",
+    "analytics": false
   },
   "defaultProject": "api"
 }

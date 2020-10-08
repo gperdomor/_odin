@@ -1,2 +1,8 @@
 include:
-  - local: .gitlab/ci.yml
+  - local: .gitlab/initialise.yml
+  - local: .gitlab/api.yml
+
+stages:
+  - initialise
+  - test
+  - build

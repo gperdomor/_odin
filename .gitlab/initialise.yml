@@ -1,0 +1,16 @@
+initialise:
+  stage: initialise
+  image: node:14.13
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - ~/.npm
+  variables:
+    GIT_DEPTH: 0
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    # - npx nx print-affected
+    - echo "Done..."
