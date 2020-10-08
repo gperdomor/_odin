@@ -29,6 +29,10 @@
   "projects": {
     "api": {
       "tags": []
+    },
+    "api-e2e": {
+      "implicitDependencies": ["api"],
+      "tags": []
     }
   }
 }

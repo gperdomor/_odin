@@ -45,26 +45,21 @@ api:test:
     reports:
       cobertura: coverage/apps/api/cobertura-coverage.xml
 
-# api:e2e:
-#   image: node:14.13
-#   stage: test
-#   needs: ['initialise']
-#   cache:
-#     <<: *cache_npm
-#   services:
-#     - rabbitmq:3.8.9-alpine
-#   variables:
-#     RMQ_URLS: amqp://rabbitmq:5672
-#   before_script:
-#     - npm ci --cache .npm --prefer-offline
-#   script:
-#     - npx nx run api-e2e:e2e
+api:e2e:
+  image: node:14.13
+  stage: test
+  needs: ['initialise']
+  cache:
+    <<: *cache_npm
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npx nx run api-e2e:e2e
 
 api:docker:
   image: 'registry.gitlab.com/gitlab-org/cluster-integration/auto-build-image:v0.4.0'
   stage: build
-  # TODO Add 'api:e2e' to needs list
-  needs: ['api:test']
+  needs: ['api:test', 'api:e2e']
   variables:
     DOCKER_TLS_CERTDIR: ''
     DOCKER_BUILDKIT: 1
