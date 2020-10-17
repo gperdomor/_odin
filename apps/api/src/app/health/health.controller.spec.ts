@@ -17,4 +17,16 @@ describe('Health Controller', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('liveness', () => {
+    it('Should return the status', async () => {
+      expect(await controller.livenessCheck()).toEqual({ status: 'ok' });
+    });
+  });
+
+  describe('readiness', () => {
+    it('Should return the status', async () => {
+      expect(await controller.readinessCheck()).toEqual(jasmine.objectContaining({ status: 'ok' }));
+    });
+  });
 });

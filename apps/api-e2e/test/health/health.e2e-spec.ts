@@ -1,7 +1,8 @@
-import { HealthModule } from '@apps/api/health/health.module';
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
+import { HealthModule } from '../../../api/src/app/health/health.module';
 
 describe('[Feature] Health - /_/healthz', () => {
   let app: INestApplication;

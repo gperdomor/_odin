@@ -5,12 +5,12 @@ import { HealthCheck, HealthCheckResult, HealthCheckService } from '@nestjs/term
 export class HealthController {
   constructor(private health: HealthCheckService) {}
 
-  @Get('liveness')
+  @Get('alive')
   async livenessCheck(): Promise<{ status: string }> {
     return { status: 'ok' };
   }
 
-  @Get('readiness')
+  @Get('ready')
   @HealthCheck()
   async readinessCheck(): Promise<HealthCheckResult> {
     return this.health.check([]);

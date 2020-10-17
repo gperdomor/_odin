@@ -71,7 +71,6 @@ api:docker:
     - export AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS="--label org.opencontainers.image.source=${CI_PROJECT_URL}"
     - export AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS="${AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS} --label org.opencontainers.image.revision=${CI_COMMIT_SHA}"
     - export AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS="${AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS} --label org.opencontainers.image.created=${CI_JOB_TIMESTAMP}"
-    - export CI_APPLICATION_TAG=${CI_COMMIT_TAG:-sha-$CI_COMMIT_SHORT_SHA}
     - export CI_APPLICATION_REPOSITORY=$CI_REGISTRY_IMAGE/api
   script:
     - |

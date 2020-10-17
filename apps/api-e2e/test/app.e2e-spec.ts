@@ -1,7 +1,8 @@
-import { AppModule } from '@apps/api/app.module';
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
+import { AppModule } from '../../api/src/app/app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
