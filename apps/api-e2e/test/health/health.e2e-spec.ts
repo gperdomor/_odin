@@ -17,13 +17,13 @@ describe('[Feature] Health - /_/healthz', () => {
     await app.init();
   });
 
-  it('Check liveness [GET /liveness]', () => {
-    return request(app.getHttpServer()).get('/_/healthz/liveness').expect(HttpStatus.OK, { status: 'ok' });
+  it('Check liveness [GET /alive]', () => {
+    return request(app.getHttpServer()).get('/_/healthz/alive').expect(HttpStatus.OK, { status: 'ok' });
   });
 
-  it('Check readiness [GET /readiness]', () => {
+  it('Check readiness [GET /ready]', () => {
     return request(app.getHttpServer())
-      .get('/_/healthz/readiness')
+      .get('/_/healthz/ready')
       .expect(HttpStatus.OK)
       .then(({ body }) => {
         const expectedCoffee = jasmine.objectContaining({ status: 'ok' });
