@@ -1,6 +1,6 @@
 initialise:
   stage: initialise
-  image: node:14.13
+  image: node:14.14
   cache:
     key:
       files:

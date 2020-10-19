@@ -1,17 +1,17 @@
-FROM node:14.13-alpine as development
+FROM node:14.14-alpine as development
 WORKDIR /app
 COPY package*.json ./
 RUN CYPRESS_INSTALL_BINARY=0 npm install --quiet
 COPY . .
 RUN npm run nx run api:build -- --c=production
 
-FROM node:14.13-alpine as cleaner
+FROM node:14.14-alpine as cleaner
 WORKDIR /app
 COPY package*.json ./
 COPY --chown=node:node --from=development /app/node_modules ./node_modules
 RUN npm prune --production
 
-FROM node:14.13-alpine as production
+FROM node:14.14-alpine as production
 LABEL maintainer="Gustavo Perdomo <gperdomor@gmail.com>"
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV

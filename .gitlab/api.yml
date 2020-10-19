@@ -7,7 +7,7 @@
   policy: pull
 
 api:build:
-  image: node:14.13
+  image: node:14.14
   stage: test
   needs: ['initialise']
   cache:
@@ -18,7 +18,7 @@ api:build:
     - npx nx run api:build
 
 api:lint:
-  image: node:14.13
+  image: node:14.14
   stage: test
   needs: ['initialise']
   cache:
@@ -29,7 +29,7 @@ api:lint:
     - npx nx run api:lint
 
 api:test:
-  image: node:14.13
+  image: node:14.14
   stage: test
   needs: ['initialise']
   cache:
@@ -46,7 +46,7 @@ api:test:
       cobertura: coverage/apps/api/cobertura-coverage.xml
 
 api:e2e:
-  image: node:14.13
+  image: node:14.14
   stage: test
   needs: ['initialise']
   cache:
