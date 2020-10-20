@@ -1,21 +1,20 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app/app.module';
+import { AppConfigService } from './config/app/config.service';
+import { configure } from './configure';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app: NestExpressApplication = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe());
+  configure(app);
 
-  const port = process.env.PORT || 3333;
-  await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port);
-  });
+  const appConfig = app.get(AppConfigService);
+
+  await app.listen(appConfig.port);
+
+  Logger.log(`🚀 Application ${appConfig.name} is running on: ${await app.getUrl()}`, 'Bootstrap');
 }
 
 bootstrap();

@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppConfigModule } from '../config/app/config.module';
+import { SERVICE_NAME } from '../constants';
 import { TenantsModule } from './tenants/tenants.module';
 
 @Module({
   imports: [
+    AppConfigModule.register({ serviceName: SERVICE_NAME, promPrefix: 'service_tenants_' }),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
@@ -16,7 +17,7 @@ import { TenantsModule } from './tenants/tenants.module';
     }),
     TenantsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
