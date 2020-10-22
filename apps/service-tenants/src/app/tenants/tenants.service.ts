@@ -2,6 +2,7 @@ import { ConflictException, Injectable, Logger, NotFoundException } from '@nestj
 import { InjectRepository } from '@nestjs/typeorm';
 import * as slugify from '@sindresorhus/slugify';
 import { Repository } from 'typeorm';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { Tenant } from './entities/tenant.entity';
@@ -15,6 +16,10 @@ export class TenantsService {
    * @param tenantRepository {TenantRepository}
    */
   constructor(@InjectRepository(Tenant) private readonly tenantRepository: Repository<Tenant>) {}
+
+  async count(withDeleted = false): Promise<number> {
+    return this.tenantRepository.count({ withDeleted });
+  }
 
   async create(createTenantDto: CreateTenantDto) {
     // TODO: Check to make sure logged in user is not null
@@ -46,8 +51,18 @@ export class TenantsService {
     return this.tenantRepository.save(tenant);
   }
 
-  async findAll(): Promise<Tenant[]> {
-    return this.tenantRepository.find();
+  async findAll(paginationQuery: PaginationQueryDto): Promise<Tenant[]> {
+    return this.findAllAndCount(paginationQuery)[0];
+  }
+
+  async findAllAndCount(paginationQuery: PaginationQueryDto): Promise<[Tenant[], number]> {
+    const { limit, page } = paginationQuery;
+
+    return this.tenantRepository.findAndCount({
+      relations: [],
+      skip: page,
+      take: limit,
+    });
   }
 
   async findOne(id: string): Promise<Tenant> {
